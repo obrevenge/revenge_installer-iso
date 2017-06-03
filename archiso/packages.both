@@ -53,6 +53,7 @@ gtk-theme-arc-git
 git
 reflector
 bash-completion
+lxterminal-gtk3
 lynx
 wget
 yad
