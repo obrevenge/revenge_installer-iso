@@ -33,7 +33,7 @@ download_installer() {
 # function to run installer, and provide choices to user after installer closes
 run_installer() {
   ./revenge_installer/rif
-  ans=$(zenity --list --title="$title" --radiolist --text "What would you like to do now?"  --column "Select" --column "Option" FALSE Restart FALSE Close FALSE CHROOT into new system FALSE open pacman.conf)
+  ans=$(zenity --list --title="$title" --radiolist --text "What would you like to do now?"  --column "Select" --column "Option" FALSE Restart FALSE Close FALSE "CHROOT into new system" FALSE "open pacman.conf")
 	if [ "$ans" = "Restart" ]
 	then reboot
 	elif [ "$ans" = "CHROOT into new system" ]
