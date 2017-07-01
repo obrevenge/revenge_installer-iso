@@ -38,13 +38,12 @@ run_installer() {
 	then reboot
 	elif [ "$ans" = "CHROOT into new system" ]
 	then sudo mount $(cat root_part.txt) /mnt
-     lxterminal -e sudo arch-chroot /mnt
+     lxterminal -e "sudo arch-chroot /mnt"
      umount -R /mnt
 	elif ["$ans" = "open pacman.conf" ]
 	then sudo mount $(cat root_part.txt) /mnt
-	sudo leafpad /mnt/etc/pacman.conf     
-	else
-	exit
+	lxterminal -e sudo nano /mnt/etc/pacman.conf     
+	else exit
 	fi
 }
 

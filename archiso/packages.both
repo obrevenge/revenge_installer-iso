@@ -33,7 +33,7 @@ networkmanager-dispatcher-ntpd
 #desktop
 openbox
 tint2
-nitrogen
+feh
 zenity
 openbox-arc-git
 gtk-theme-arc-git
