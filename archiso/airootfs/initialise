@@ -1,11 +1,11 @@
 #!/bin/sh
 #
-# Revenge Installer Network Configuration and Startup Script
+# Zen Installer Network Configuration and Startup Script
 #
-# Written by Jody James for the Revenge Installer
+# Written by Jody James for the Revenge(now Zen) Installer
 #
 # This script will greet the user, ensure an internet connection
-# and download the latest version of the Revenge Installer from 
+# and download the latest version of the Zen Installer from 
 # Github. 
 #
 # This program is free software, provided under the GNU General Public License
@@ -13,11 +13,11 @@
 # or modify it as you wish.
 #
 # Setting title variable
-title="Revenge Installer Network Tool"
+title="Zen Installer Network Tool"
 
 # Greeting user and advising user to connect if not already
 greeting () { 
-zenity --question --title="$title" --text "Welcome to the Revenge Installer\nPlease ensure that you have an active internet connection.\nIf you need to connect via wifi, you may click the network icon in the above panel.\nIf you are using a wired connection, Network Manager should automatically detect it and connect.\nWhen you have connected to the internet, click the 'yes' button to proceed.\nIf you would like to exit the installer you may click 'no'.\nTo open a terminal and use this as a rescue cd, hit ctrl+alt+t." --height=40
+zenity --question --title="$title" --text "Welcome to the Zen Installer\nPlease ensure that you have an active internet connection.\nIf you need to connect via wifi, you may click the network icon in the above panel.\nIf you are using a wired connection, Network Manager should automatically detect it and connect.\nWhen you have connected to the internet, click the 'yes' button to proceed.\nIf you would like to exit the installer you may click 'no'.\nTo open a terminal and use this as a rescue cd, hit ctrl+alt+t." --height=40
 
 if [ "$?" = "1" ]
 	then exit
@@ -26,21 +26,21 @@ fi
 
 # function to download installer and make sure it is executable
 download_installer() {
-  git clone https://github.com/obrevenge/revenge_installer
-  chmod +x revenge_installer/rif
+  git clone https://github.com/obrevenge/zen_installer
+  chmod +x zen_installer/zif
 }
 
 # function to run installer, and provide choices to user after installer closes
 run_installer() {
-  ./revenge_installer/rif
-  ans=$(zenity --list --title="$title" --radiolist --text "What would you like to do now?"  --column "Select" --column "Option" FALSE Restart FALSE Close FALSE "CHROOT into new system" FALSE "open pacman.conf")
+  ./zen_installer/zif
+  ans=$(zenity --list --title="$title" --radiolist --text "What would you like to do now?"  --column "Select" --column "Option" FALSE Restart FALSE Close FALSE "Chroot into new system" FALSE "Open pacman.conf")
 	if [ "$ans" = "Restart" ]
 	then reboot
-	elif [ "$ans" = "CHROOT into new system" ]
+	elif [ "$ans" = "Chroot into new system" ]
 	then sudo mount $(cat root_part.txt) /mnt
-     lxterminal -e "sudo arch-chroot /mnt"
+     lxterminal -e sudo arch-chroot /mnt
      umount -R /mnt
-	elif ["$ans" = "open pacman.conf" ]
+	elif [ "$ans" = "Open pacman.conf" ]
 	then sudo mount $(cat root_part.txt) /mnt
 	lxterminal -e sudo nano /mnt/etc/pacman.conf     
 	else exit
